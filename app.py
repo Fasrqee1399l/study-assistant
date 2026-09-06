@@ -201,7 +201,7 @@ def analyze():
 
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": "أنت معلم دراسي متخصص ومساعد ذكي للطلاب."},
                 {"role": "user", "content": prompt}
@@ -232,7 +232,7 @@ def chat():
 
     try:
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.3-70b-versatile",
             messages=[
                 {"role": "system", "content": "أنت معلم ودود يجيب على استفسارات الطلاب بأسلوب واضح وشائق."},
                 {"role": "user", "content": prompt}
