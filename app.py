@@ -4,6 +4,7 @@ from groq import Groq
 
 app = Flask(__name__)
 
+# استدعاء مفتاح API الخاص بـ Groq
 client = Groq(api_key=os.environ.get("OPENAI_API_KEY"))
 
 PREDEFINED_LESSONS = {
@@ -200,7 +201,7 @@ def analyze():
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="llama3-8b-8192",
             messages=[
                 {"role": "system", "content": "أنت معلم دراسي متخصص ومساعد ذكي للطلاب."},
                 {"role": "user", "content": prompt}
@@ -231,7 +232,7 @@ def chat():
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+            model="llama3-8b-8192",
             messages=[
                 {"role": "system", "content": "أنت معلم ودود يجيب على استفسارات الطلاب بأسلوب واضح وشائق."},
                 {"role": "user", "content": prompt}
