@@ -1,12 +1,13 @@
 import os
 from flask import Flask, render_template_string, request, jsonify
-from groq import Groq
+import google.generativeai as genai
 
 app = Flask(__name__)
 
-# استخدام المفتاح المستدعى لـ Groq مباشرة
-api_key = os.environ.get("OPENAI_API_KEY") or os.environ.get("GROQ_API_KEY")
-client = Groq(api_key=api_key)
+# إعداد مفتاح Google Gemini
+api_key = os.environ.get("GEMINI_API_KEY")
+if api_key:
+    genai.configure(api_key=api_key)
 
 PREDEFINED_LESSONS = {
     "lesson1": {
@@ -194,23 +195,16 @@ def analyze():
 
     1. **التلخيص الشامل:** قم بتلخيص أهم نقاط الدرس بشكل ملخص وواضح يسهل على الطالب استيعابه.
     2. **الأفكار الرئيسية:** اذكر أهم 3 مفاهيم في الدرس.
-    3. **الأسئلة التفاعلية (حسب الأهمية):** صمم 3 أسئلة اختيار من متعدد هامة ومترتبة حسب الأهمية الاختيارية، واكتب الإجابة الصحيحة وشرح بسيط لها.
+    3. **الأسئلة التفاعلية:** صمم 3 أسئلة اختيار من متعدد هامة، واكتب الإجابة الصحيحة وشرح بسيط لها.
 
     نص الدرس:
     {lesson_text}
     """
 
     try:
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[
-                {"role": "system", "content": "أنت معلم دراسي متخصص ومساعد ذكي للطلاب."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        result_text = response.choices[0].message.content
-        return jsonify({'result': result_text, 'lesson_content': lesson_text})
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = model.generate_content(prompt)
+        return jsonify({'result': response.text, 'lesson_content': lesson_text})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -232,16 +226,9 @@ def chat():
     """
 
     try:
-        response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
-            messages=[
-                {"role": "system", "content": "أنت معلم ودود يجيب على استفسارات الطلاب بأسلوب واضح وشائق."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7
-        )
-        reply = response.choices[0].message.content
-        return jsonify({'reply': reply})
+        model = genai.GenerativeModel('gemini-1.5-flash')
+        response = model.generate_content(prompt)
+        return jsonify({'reply': response.text})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
