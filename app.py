@@ -202,7 +202,8 @@ def analyze():
     """
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # استخدام gemini-2.0-flash وهو النموذج الأحدث والمستقر
+        model = genai.GenerativeModel('gemini-2.0-flash')
         response = model.generate_content(prompt)
         return jsonify({'result': response.text, 'lesson_content': lesson_text})
     except Exception as e:
@@ -226,7 +227,7 @@ def chat():
     """
 
     try:
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         response = model.generate_content(prompt)
         return jsonify({'reply': response.text})
     except Exception as e:
