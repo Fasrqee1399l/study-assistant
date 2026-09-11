@@ -166,7 +166,6 @@
             margin-bottom: 30px;
         }
 
-        /* كروت الأسئلة التفاعلية قابلة للنقر */
         .q-card {
             background: rgba(30, 41, 59, 0.6);
             border: 1px solid var(--border);
@@ -570,7 +569,7 @@
         <button class="close-chat" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-body" id="chatBody">
-        <div class="msg bot">مرحباً فارس! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة وسأشرحها لك فوراً!</div>
+        <div class="msg bot">مرحباً بك! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة أو مفهوم لم تفهمه وسأشرحه لك بالتفصيل!</div>
     </div>
     <div class="chat-footer">
         <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
@@ -609,7 +608,6 @@
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // دالة جديدة لربط بطاقات الأسئلة المقترحة مباشرة بالشات
     function askAiQuestion(questionText) {
         const modal = document.getElementById('chatModal');
         modal.style.display = 'flex';
