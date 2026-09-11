@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template_string, request, jsonify
+from flask import Flask, return render_template('index.html'), request, jsonify
 from google import genai
 
 app = Flask(__name__)
