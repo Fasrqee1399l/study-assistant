@@ -4,13 +4,15 @@ from google import genai
 
 app = Flask(__name__)
 
-# إعداد العميل للتواصل مع نموذج Gemini
-# يتم جلب المفتاح تلقائياً من بيئة العمل على Render (GEMINI_API_KEY)
 client = genai.Client()
+
+SYSTEM_INSTRUCTION = (
+    "أنت مساعد دراسي ذكي ومتخصص في مادة الأحياء. عند طلب شرح أو تلخيص أي نقطة، "
+    "قدم إجابات وافية وشاملة ومفصلة بأسلوب سهل يناسب طلاب الثانوية."
+)
 
 @app.route('/')
 def home():
-    # عرض صفحة index.html الموجودة داخل مجلد templates
     return render_template('index.html')
 
 @app.route('/api/chat', methods=['POST'])
@@ -22,10 +24,10 @@ def chat():
         if not user_message:
             return jsonify({'error': 'Message is required'}), 400
 
-        # إرسال الطلب إلى نموذج Gemini
+        # استخدام النموذج المحدث gemini-3.6-flash
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=user_message,
+            model='gemini-3.6-flash',
+            contents=f"{SYSTEM_INSTRUCTION}\n\nسؤال الطالب: {user_message}",
         )
 
         return jsonify({'response': response.text})
