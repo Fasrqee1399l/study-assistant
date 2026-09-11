@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>منصة التميز الدراسي - أحياء 1</title>
-    <!-- استدعاء خط Tajawal المميز -->
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -39,7 +38,6 @@
             max-width: 1000px;
         }
 
-        /* بطاقة الطالب الفخمة */
         .student-header {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border: 1px solid #334155;
@@ -65,7 +63,6 @@
             margin-top: 4px;
         }
 
-        /* أزرار اختيار الدروس */
         .lesson-nav {
             display: flex;
             gap: 15px;
@@ -98,7 +95,6 @@
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
         }
 
-        /* محتوى الدرس */
         .lesson-content {
             display: none;
             animation: fadeIn 0.4s ease-in-out forwards;
@@ -113,7 +109,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* صندوق التلخيص الطويل */
         .summary-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -155,7 +150,6 @@
             font-weight: bold;
         }
 
-        /* مستطيلات الأسئلة المقترحة */
         .section-title {
             font-size: 1.4rem;
             color: var(--text-main);
@@ -197,7 +191,6 @@
             font-size: 0.95rem;
         }
 
-        /* قسم الاختبار التفاعلي */
         .quiz-section {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -207,7 +200,15 @@
         }
 
         .quiz-q {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .quiz-q:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
         }
 
         .quiz-q p {
@@ -238,7 +239,6 @@
             background-color: #1e293b;
         }
 
-        /* الزر الدائري للـ AI (أسفل اليسار) */
         .ai-fab {
             position: fixed;
             bottom: 30px;
@@ -264,7 +264,6 @@
             transform: scale(1.1);
         }
 
-        /* نافذة محادثة AI المنبثقة */
         .chat-modal {
             position: fixed;
             bottom: 105px;
@@ -367,10 +366,9 @@
 <body>
 
 <div class="container">
-    <!-- بطاقة الطالب الفخمة -->
     <div class="student-header">
         <div class="student-info">
-            <h2>فارس المطيري 🎓</h2>
+            <h2>إعداد الطالب: فارس المطيري 🎓</h2>
             <p>مادة الأحياء (1) - الصف الأول الثانوي</p>
         </div>
         <div>
@@ -380,15 +378,13 @@
         </div>
     </div>
 
-    <!-- أزرار اختيار الدرس -->
     <div class="lesson-nav">
         <button class="nav-btn active" onclick="switchLesson('lesson1', this)">1️⃣ درس: مدخل إلى علم الأحياء</button>
         <button class="nav-btn" onclick="switchLesson('lesson2', this)">2️⃣ درس: طبيعة العلم وطرائقه</button>
     </div>
 
-    <!-- ==================== الدرس الأول ==================== -->
+    <!-- الدرس الأول -->
     <div id="lesson1" class="lesson-content active">
-        <!-- التلخيص الطويل الشامل -->
         <div class="summary-card">
             <h3>📑 تلخيص شامل: مدخل إلى علم الأحياء</h3>
             <p><span class="highlight">علم الأحياء (Biology):</span> هو العلم الذي يدرس أصل الحياة وتاريخها وكل ما كان حياً يوماً ما، وتركيب المخلوقات الحية وكيف تقوم بوظائفها وكيف تتفاعل مع بعضها ومع بيئاتها.</p>
@@ -396,104 +392,123 @@
             <h3>👨‍🔬 ماذا يفعل علماء الأحياء؟</h3>
             <ul>
                 <li><strong>دراسة تنوع الحياة:</strong> البحث في خواص المخلوقات الحية وتصنيفها من البكتيريا إلى النباتات والحيوانات.</li>
-                <li><strong>الفيض في الأمراض:</strong> البحث في أسباب الأمراض، كيفية انتشارها، وطرق وقاية الجسم منها وتطوير اللقاحات.</li>
-                <li><strong>تطوير التقنيات (Technological Development):</strong> تطبيق المعرفة العلمية لتلبية احتياجات الإنسان مثل تحسين المحاصيل الزراعية والأطراف الصناعية.</li>
-                <li><strong>حماية البيئة:</strong> دراسة المحافظة على الأنواع المهددة بالانقراض وحماية الموارد الطبيعية.</li>
+                <li><strong>البحث في الأمراض:</strong> دراسة أسباب الأمراض، كيفية انتشارها، وتطوير اللقاحات والأدوية.</li>
+                <li><strong>تطوير التقنيات:</strong> تطبيق المعرفة العلمية لتلبية احتياجات الإنسان مثل تحسين المحاصيل الزراعية.</li>
+                <li><strong>حماية البيئة:</strong> دراسة وسائل المحافظة على الأنواع المهددة بالانقراض وحماية الموارد الطبيعية.</li>
             </ul>
 
             <h3>🧬 خصائص المخلوق الحي (الخصائص الثمانية):</h3>
             <ul>
-                <li><strong>مكون من خلية أو أكثر:</strong> الخلية هي وحدة التركيب والوظيفة الأساسية في المخلوق الحي.</li>
-                <li><strong>إظهار التنظيم (التعضي):</strong> تنظيم الخلايا إلى أنسجة، والأنسجة إلى أعضاء، والأعضاء إلى أجهزة.</li>
+                <li><strong>مكون من خلية أو أكثر:</strong> الخلية هي وحدة التركيب والوظيفة الأساسية.</li>
+                <li><strong>إظهار التنظيم (التعضي):</strong> تنظيم الخلايا إلى أنسجة، وأنسجة إلى أعضاء، وأعضاء إلى أجهزة.</li>
                 <li><strong>النمو:</strong> زيادة في كتلة المخلوق الحي وتكون أشكال جديدة.</li>
-                <li><strong>التكاثر:</strong> إنتاج أفراد جديدة لنفس النوع للحفاظ على النوع من الانقراض.</li>
+                <li><strong>التكاثر:</strong> إنتاج أفراد جديدة لنفس النوع للحفاظ عليه من الانقراض.</li>
                 <li><strong>الحاجة إلى الطاقة:</strong> استهلاك الغذاء للحصول على الطاقة اللازمة للأنشطة الحيوية.</li>
-                <li><strong>الاستجابة للمثيرات:</strong> التفاعل مع المؤثرات الداخلية والخارجية (مثل البيئة).</li>
+                <li><strong>الاستجابة للمثيرات:</strong> التفاعل مع المؤثرات الداخلية والخارجية.</li>
                 <li><strong>المحافظة على الاتزان الداخلي:</strong> تنظيم الظروف الداخلية للمخلوق الحي للبقاء على قيد الحياة.</li>
-                <li><strong>التكيف:</strong> ملائمة قابلة للتوارث في سلوك المخلوق أو تركيبه لتمكينه من العيش بملائمة في بيئته.</li>
+                <li><strong>التكيف:</strong> ملاءمة قابلة للتوارث تمكن المخلوق من العيش بملائمة في بيئته.</li>
             </ul>
         </div>
 
-        <!-- المستطيلات: الأسئلة المقترحة -->
         <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار</div>
         <div class="questions-grid">
             <div class="q-card">
                 <div class="q-title">س: ما الفرق بين الاستجابة والتكيف؟</div>
-                <div class="q-ans">الاستجابة رد فعل موقت ومباشر لمثير ما، بينما التكيف ملاءمة صلبة موروثة تمكن المخلوق من البقاء عبر الأجيال.</div>
+                <div class="q-ans">الاستجابة رد فعل موقت ومباشر لمثير ما، بينما التكيف ملاءمة موروثة تمكن المخلوق من البقاء عبر الأجيال.</div>
             </div>
             <div class="q-card">
-                <div class="q-title">س: لماذا لا تُعد الكريستالات مخلوقات حية رغم نموها؟</div>
-                <div class="q-ans">لأنها تفتقر لباقي خصائص الحياة الأساسية مثل التكون من خلايا، التكاثر، الاتزان الداخلي، والتكيف.</div>
+                <div class="q-title">س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</div>
+                <div class="q-ans">لأنها تفتقر لباقي خصائص الحياة مثل الخلية، التكاثر، الاتزان الداخلي، والتكيف.</div>
             </div>
             <div class="q-card">
                 <div class="q-title">س: ما أهمية التكاثر للمخلوق الحي؟</div>
-                <div class="q-ans">التكاثر ليس ضرورياً لبقاء الفرد نفسه، ولكنه أساسي جداً لحفظ النوع بأكمله من الانقراض.</div>
+                <div class="q-ans">أساسي لحفظ النوع بأكمله من الانقراض وليس لحياة الفرد بمفرده.</div>
             </div>
         </div>
 
-        <!-- قسم الاختبار التفاعلي -->
         <div class="quiz-section">
-            <div class="section-title">📝 اختبر نفسك (اختبار سريع)</div>
+            <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
+            
             <div class="quiz-q">
-                <p>1. أي مما يلي يُعبر عن تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه؟</p>
+                <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
                 <div class="options">
                     <button class="option-btn" onclick="checkAnswer(this, false)">أ) التكيف</button>
                     <button class="option-btn" onclick="checkAnswer(this, true)">ب) الاتزان الداخلي</button>
                     <button class="option-btn" onclick="checkAnswer(this, false)">ج) النمو</button>
                 </div>
             </div>
+
+            <div class="quiz-q">
+                <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, true)">أ) الاستجابة للمثيرات</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التعضي</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) التكيف</button>
+                </div>
+            </div>
+
+            <div class="quiz-q">
+                <p>3. أي من التالي يُعد الوحدة الأساسية للتركيب والوظيفة في جميع المخلوقات الحية؟</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) العضو</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) النسيج</button>
+                    <button class="option-btn" onclick="checkAnswer(this, true)">ج) الخلية</button>
+                </div>
+            </div>
+
+            <div class="quiz-q">
+                <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل تقليل فقدان الماء يُعد مثالاً على:</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, true)">أ) التكيف</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التكاثر</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) الاتزان الداخلي</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- ==================== الدرس الثاني ==================== -->
+    <!-- الدرس الثاني -->
     <div id="lesson2" class="lesson-content">
-        <!-- التلخيص الطويل الشامل -->
         <div class="summary-card">
             <h3>📑 تلخيص شامل: طبيعة العلم وطرائقه</h3>
-            <p><span class="highlight">العلم الطبيعي (التجريبي):</span> هو بناء من المعرفة اعتمد على دراسة الطبيعة من خلال الملاحظة والتجريب (مثل الأحياء، الكيمياء، الفيزياء).</p>
+            <p><span class="highlight">العلم الطبيعي (التجريبي):</span> هو بناء من المعرفة اعتمد على دراسة الطبيعة من خلال الملاحظة والتجريب.</p>
 
             <h3>⚙️ خصائص العلم الطبيعي:</h3>
             <ul>
                 <li><strong>يعتمد على الدليل:</strong> يجمع الحقائق المباشرة والأدلة القابلة للملاحظة.</li>
-                <li><strong>ينتج أسئلة جديدة:</strong> كل اكتشاف يفتح أفاقاً وأسئلة بحثية جديدة.</li>
+                <li><strong>ينتج أسئلة جديدة:</strong> كل اكتشاف يفتح أفاقاً وبحوثاً جديدة.</li>
                 <li><strong>يختبر الاستنتاجات:</strong> إخضاع الفرضيات لمزيد من الاختبارات الدقيقة.</li>
                 <li><strong>يتحدى النظريات المقبولة:</strong> مناقشة الآراء والنتائج العلمية وتطويرها باستمرار.</li>
-                <li><strong>يخضع لمراجعة الأقران:</strong> تقييم الأبحاث بواسطة علماء متخصصين في نفس المجال قبل نشرها.</li>
+                <li><strong>يخضع لمراجعة الأقران:</strong> تقييم الأبحاث بواسطة علماء متخصصين في نفس المجال.</li>
             </ul>
 
             <h3>🔍 الطرائق العلمية (Scientific Methods):</h3>
             <ul>
-                <li><strong>الملاحظة:</strong> طريقة منتظمة لجمع المعلومات باستخدام الحواس أو الأدوات.</li>
+                <li><strong>الملاحظة:</strong> طريقة منتظمة لجمع المعلومات باستعمال الحواس أو الأدوات.</li>
                 <li><strong>صياغة الفرضية:</strong> تفسير قابل للاختبار للظاهرة العلمية.</li>
-                <li><strong>التجربة المنضبطة:</strong> اختبا الفرضية في بيئة محددة تحتوي على:
-                    <br>- <i>المتغير المستقل:</i> العامل الذي نغيره في التجربة.
-                    <br>- <i>المتغير التابع:</i> العامل الذي ينتج عن المتغير المستقل ونقيسه.
-                    <br>- <i>المجموعة الضابطة:</i> المجموعة التي تُستخدم للمقارنة ولا نغير فيها شيئاً.
-                    <br>- <i>المجموعة التجريبية:</i> المجموعة التي تتعرض لتأثير المتغير المستقل.</li>
-                <li><strong>تحليل البيانات واستنتاج النتائج:</strong> تنظيم البيانات في جداول ورسوم بيانية لاستخلاص النتائج.</li>
+                <li><strong>التجربة المنضبطة:</strong> تجربة تحتوي على متغير مستقل، متغير تابع، ومجموعة ضابطة.</li>
             </ul>
         </div>
 
-        <!-- المستطيلات: الأسئلة المقترحة -->
         <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار</div>
         <div class="questions-grid">
             <div class="q-card">
                 <div class="q-title">س: ما الفرق بين المتغير المستقل والمتغير التابع؟</div>
-                <div class="q-ans">المتغير المستقل هو العامل الذي يُغيره الباحث، بينما المتغير التابع يتغير تبعاً لتغير المتغير المستقل ويتم قياسه.</div>
+                <div class="q-ans">المتغير المستقل يُغيره الباحث، بينما المتغير التابع يتغير تبعاً له ويتم قياسه.</div>
             </div>
             <div class="q-card">
                 <div class="q-title">س: ما أهمية المجموعة الضابطة في التجربة؟</div>
-                <div class="q-ans">تُستخدم كمعيار قياسي للمقارنة لمعرفة مدى تأثير المتغير المستقل على المجموعة التجريبية.</div>
+                <div class="q-ans">تُستخدم معياراً للمقارنة لمعرفة مدى تأثير المتغير المستقل.</div>
             </div>
             <div class="q-card">
                 <div class="q-title">س: ماذا نعني بمراجعة الأقران؟</div>
-                <div class="q-ans">فحص وتدقيق الأبحاث والنتائج العلمية بواسطة علماء آخرين متخصصين في نفس المجال قبل إعتمادها.</div>
+                <div class="q-ans">تدقيق الأبحاث والنتائج العلمية بواسطة علماء آخرين متخصصين قبل نشرها.</div>
             </div>
         </div>
 
-        <!-- قسم الاختبار التفاعلي -->
         <div class="quiz-section">
-            <div class="section-title">📝 اختبر نفسك (اختبار سريع)</div>
+            <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
+            
             <div class="quiz-q">
                 <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
                 <div class="options">
@@ -502,21 +517,46 @@
                     <button class="option-btn" onclick="checkAnswer(this, false)">ج) المجموعة الضابطة</button>
                 </div>
             </div>
+
+            <div class="quiz-q">
+                <p>2. المجموعة التي تُستخدم للمقارنة في التجربة ولا يُجرى عليها أي تغيير هي:</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) المجموعة التجريبية</button>
+                    <button class="option-btn" onclick="checkAnswer(this, true)">ب) المجموعة الضابطة</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) الفرضية</button>
+                </div>
+            </div>
+
+            <div class="quiz-q">
+                <p>3. صياغة تفسير قابل للاختبار يُعرف بـ:</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) الملاحظة</button>
+                    <button class="option-btn" onclick="checkAnswer(this, true)">ب) الفرضية</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) النظرية</button>
+                </div>
+            </div>
+
+            <div class="quiz-q">
+                <p>4. فحص الأبحاث بواسطة علماء في نفس التخصص قبل إعلانها يُسمى:</p>
+                <div class="options">
+                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) الاستنتاج</button>
+                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التجريب</button>
+                    <button class="option-btn" onclick="checkAnswer(this, true)">ج) مراجعة الأقران</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!-- الزر العائم AI للذكاء الاصطناعي (أسفل اليسار) -->
 <button class="ai-fab" onclick="toggleChat()">AI</button>
 
-<!-- نافذة محادثة الذكاء الاصطناعي المنبثقة -->
 <div class="chat-modal" id="chatModal">
     <div class="chat-header">
         <h4>🤖 المساعد العلمي الذكي</h4>
         <button class="close-chat" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-body" id="chatBody">
-        <div class="msg bot">مرحباً فارس! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة أو مفهوم لم تفهمه وسأشرحه لك بالتفصيل!</div>
+        <div class="msg bot">مرحباً فارس! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة وسأشرحها لك فوراً!</div>
     </div>
     <div class="chat-footer">
         <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
@@ -525,16 +565,13 @@
 </div>
 
 <script>
-    // التبديل بين الدروس
     function switchLesson(lessonId, btn) {
         document.querySelectorAll('.lesson-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
-        
         document.getElementById(lessonId).classList.add('active');
         btn.classList.add('active');
     }
 
-    // التحقق من إجابات الاختبار
     function checkAnswer(btn, isCorrect) {
         const parent = btn.parentElement;
         parent.querySelectorAll('.option-btn').forEach(b => {
@@ -553,13 +590,11 @@
         }
     }
 
-    // فتح وإغلاق شات AI
     function toggleChat() {
         const modal = document.getElementById('chatModal');
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
 
-    // إرسال الرسالة إلى AI عبر Flask
     async function sendAiMessage() {
         const input = document.getElementById('chatInput');
         const body = document.getElementById('chatBody');
