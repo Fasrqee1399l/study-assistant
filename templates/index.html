@@ -166,17 +166,31 @@
             margin-bottom: 30px;
         }
 
+        /* كروت الأسئلة التفاعلية قابلة للنقر */
         .q-card {
             background: rgba(30, 41, 59, 0.6);
             border: 1px solid var(--border);
             border-right: 4px solid var(--accent);
             border-radius: 12px;
             padding: 20px;
-            transition: transform 0.2s;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
         }
 
         .q-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .q-card::after {
+            content: "💬 اضغط لمناقشة السؤال مع AI";
+            display: block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         .q-title {
@@ -410,17 +424,17 @@
             </ul>
         </div>
 
-        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار</div>
+        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
         <div class="questions-grid">
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين الاستجابة والتكيف؟ اشرح لي بالتفصيل.')">
                 <div class="q-title">س: ما الفرق بين الاستجابة والتكيف؟</div>
                 <div class="q-ans">الاستجابة رد فعل موقت ومباشر لمثير ما، بينما التكيف ملاءمة موروثة تمكن المخلوق من البقاء عبر الأجيال.</div>
             </div>
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟ اشرح لي التفاصيل.')">
                 <div class="q-title">س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</div>
                 <div class="q-ans">لأنها تفتقر لباقي خصائص الحياة مثل الخلية، التكاثر، الاتزان الداخلي، والتكيف.</div>
             </div>
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('ما أهمية التكاثر للمخلوق الحي؟ اشرح لي ذلك.')">
                 <div class="q-title">س: ما أهمية التكاثر للمخلوق الحي؟</div>
                 <div class="q-ans">أساسي لحفظ النوع بأكمله من الانقراض وليس لحياة الفرد بمفرده.</div>
             </div>
@@ -457,7 +471,7 @@
             </div>
 
             <div class="quiz-q">
-                <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل تقليل فقدان الماء يُعد مثالاً على:</p>
+                <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل فقدان الماء يُعد مثالاً على:</p>
                 <div class="options">
                     <button class="option-btn" onclick="checkAnswer(this, true)">أ) التكيف</button>
                     <button class="option-btn" onclick="checkAnswer(this, false)">ب) التكاثر</button>
@@ -490,17 +504,17 @@
             </ul>
         </div>
 
-        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار</div>
+        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
         <div class="questions-grid">
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين المتغير المستقل والمتغير التابع؟ اشرح لي مع أمثلة.')">
                 <div class="q-title">س: ما الفرق بين المتغير المستقل والمتغير التابع؟</div>
                 <div class="q-ans">المتغير المستقل يُغيره الباحث، بينما المتغير التابع يتغير تبعاً له ويتم قياسه.</div>
             </div>
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('ما أهمية المجموعة الضابطة في التجربة؟ اشرح لي ذلك.')">
                 <div class="q-title">س: ما أهمية المجموعة الضابطة في التجربة؟</div>
                 <div class="q-ans">تُستخدم معياراً للمقارنة لمعرفة مدى تأثير المتغير المستقل.</div>
             </div>
-            <div class="q-card">
+            <div class="q-card" onclick="askAiQuestion('ماذا نعني بمراجعة الأقران وما أهميتها؟')">
                 <div class="q-title">س: ماذا نعني بمراجعة الأقران؟</div>
                 <div class="q-ans">تدقيق الأبحاث والنتائج العلمية بواسطة علماء آخرين متخصصين قبل نشرها.</div>
             </div>
@@ -593,6 +607,16 @@
     function toggleChat() {
         const modal = document.getElementById('chatModal');
         modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    // دالة جديدة لربط بطاقات الأسئلة المقترحة مباشرة بالشات
+    function askAiQuestion(questionText) {
+        const modal = document.getElementById('chatModal');
+        modal.style.display = 'flex';
+        
+        const input = document.getElementById('chatInput');
+        input.value = questionText;
+        sendAiMessage();
     }
 
     async function sendAiMessage() {
