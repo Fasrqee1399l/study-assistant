@@ -566,7 +566,7 @@ def chat_api():
 
     try:
         response = client.models.generate_content(
-            model='gemini-2.5-flash',
+            model="gemini-3.6-flash",
             contents=f"{system_prompt}\n\nسؤال الطالب: {user_msg}"
         )
         return jsonify({"response": response.text})
