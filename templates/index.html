@@ -252,6 +252,18 @@
             background-color: #1e293b;
         }
 
+        .explanation-box {
+            display: none;
+            margin-top: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            background: rgba(15, 23, 42, 0.8);
+            border-right: 4px solid var(--primary);
+            color: #e2e8f0;
+        }
+
         .ai-fab {
             position: fixed;
             bottom: 30px;
@@ -442,40 +454,44 @@
         <div class="quiz-section">
             <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
             
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: الاتزان الداخلي هو تنظيم الظروف الداخلية للمخلوق الحي للحفاظ على حياته واستقراره الفسيولوجي.">
                 <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) التكيف</button>
-                    <button class="option-btn" onclick="checkAnswer(this, true)">ب) الاتزان الداخلي</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) النمو</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) التكيف</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الاتزان الداخلي</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النمو</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: الحركة المفاجئة لأسراب الأسماك عند التهديد هي رد فعل سريع ومباشر لمؤثر خارجي (الخطر) وتسمى استجابة.">
                 <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, true)">أ) الاستجابة للمثيرات</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التعضي</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) التكيف</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) الاستجابة للمثيرات</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التعضي</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) التكيف</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: الخلية هي أصغر وحدة بناء وتركيب تؤدي كافة الوظائف الحيوية في أجهزة الكائنات الحية.">
                 <p>3. أي من التالي يُعد الوحدة الأساسية للتركيب والوظيفة في جميع المخلوقات الحية؟</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) العضو</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) النسيج</button>
-                    <button class="option-btn" onclick="checkAnswer(this, true)">ج) الخلية</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) العضو</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) النسيج</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) الخلية</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: تحوير الأوراق لأشواك هي صفة موروثة تطورت لتلائم بيئة الصحراء الجافة وتقليل بخر الماء.">
                 <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل فقدان الماء يُعد مثالاً على:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, true)">أ) التكيف</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التكاثر</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) الاتزان الداخلي</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) التكيف</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التكاثر</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الاتزان الداخلي</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
         </div>
     </div>
@@ -522,40 +538,44 @@
         <div class="quiz-section">
             <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
             
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: المتغير المستقل هو العامل الذي يتحكم فيه الباحث ويقوم بتغييره لمعرفة مدى تأثيره على النتائج.">
                 <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, true)">أ) المتغير المستقل</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) المتغير التابع</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) المجموعة الضابطة</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) المتغير المستقل</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) المتغير التابع</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) المجموعة الضابطة</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: المجموعة الضابطة تبقى تحت ظروف طبيعية دون تغير لتعطي أساساً أو معياراً نقارن به نتائج المجموعة التجريبية.">
                 <p>2. المجموعة التي تُستخدم للمقارنة في التجربة ولا يُجرى عليها أي تغيير هي:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) المجموعة التجريبية</button>
-                    <button class="option-btn" onclick="checkAnswer(this, true)">ب) المجموعة الضابطة</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) الفرضية</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) المجموعة التجريبية</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) المجموعة الضابطة</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الفرضية</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: الفرضية هي اقتراح أو تفسير مؤقت ظاهري يصوغه الباحث ويكون قابلاً للاختبار بالتجربة.">
                 <p>3. صياغة تفسير قابل للاختبار يُعرف بـ:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) الملاحظة</button>
-                    <button class="option-btn" onclick="checkAnswer(this, true)">ب) الفرضية</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ج) النظرية</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الملاحظة</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الفرضية</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النظرية</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
 
-            <div class="quiz-q">
+            <div class="quiz-q" data-explanation="التبرير: مراجعة الأقران تضمن المصداقية والدقة العلمية للأبحاث قبل اعتمادها ونشرها للمجتمع العلمي.">
                 <p>4. فحص الأبحاث بواسطة علماء في نفس التخصص قبل إعلانها يُسمى:</p>
                 <div class="options">
-                    <button class="option-btn" onclick="checkAnswer(this, false)">أ) الاستنتاج</button>
-                    <button class="option-btn" onclick="checkAnswer(this, false)">ب) التجريب</button>
-                    <button class="option-btn" onclick="checkAnswer(this, true)">ج) مراجعة الأقران</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الاستنتاج</button>
+                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التجريب</button>
+                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) مراجعة الأقران</button>
                 </div>
+                <div class="explanation-box"></div>
             </div>
         </div>
     </div>
@@ -585,22 +605,46 @@
         btn.classList.add('active');
     }
 
-    function checkAnswer(btn, isCorrect) {
-        const parent = btn.parentElement;
-        parent.querySelectorAll('.option-btn').forEach(b => {
+    function checkAnswer(btn) {
+        const questionCard = btn.closest('.quiz-q');
+        const options = questionCard.querySelectorAll('.option-btn');
+        const explanationBox = questionCard.querySelector('.explanation-box');
+        const isCorrect = btn.getAttribute('data-correct') === 'true';
+
+        // إعادة ضبط الأزرار
+        options.forEach(b => {
             b.style.backgroundColor = '#0f172a';
             b.style.borderColor = 'var(--border)';
+            b.style.color = 'var(--text-main)';
         });
 
-        if(isCorrect) {
+        if (isCorrect) {
+            // إجابة صحيحة
             btn.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
             btn.style.borderColor = 'var(--accent)';
-            alert('إجابة صحيحة! أحسنت 🌟');
+            btn.style.color = '#10b981';
+            explanationBox.style.borderRightColor = 'var(--accent)';
+            explanationBox.innerHTML = `✅ <strong>إجابة صحيحة!</strong><br>${questionCard.dataset.explanation}`;
         } else {
+            // إجابة خاطئة
             btn.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
             btn.style.borderColor = '#ef4444';
-            alert('إجابة خاطئة، حاول مرة أخرى! ❌');
+            btn.style.color = '#ef4444';
+
+            // تظليل الإجابة الصحيحة بالأخضر
+            options.forEach(b => {
+                if (b.getAttribute('data-correct') === 'true') {
+                    b.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
+                    b.style.borderColor = 'var(--accent)';
+                    b.style.color = '#10b981';
+                }
+            });
+
+            explanationBox.style.borderRightColor = '#ef4444';
+            explanationBox.innerHTML = `❌ <strong>إجابة خاطئة.</strong> الإجابة الصحيحة موضحة باللون الأخضر.<br>${questionCard.dataset.explanation}`;
         }
+
+        explanationBox.style.display = 'block';
     }
 
     function toggleChat() {
