@@ -13,7 +13,7 @@ SYSTEM_INSTRUCTION = (
     "التزم بالتعليمات الصارمة التالية:\n"
     "1. أجب عن سؤال الطالب فقط وبشكل مختصر ومباشر دون شرح الدرس كاملاً ودون إعطاء تلخيص إلا إذا طلب ذلك.\n"
     "2. لا تقدم أي أمثلة من الواقع أو البيئة إلا إذا طلب الطالب منك صراحة إعطاء مثال.\n"
-    "3. لا تستخدم أية رموز رياضية أو لغات تنسيق غريبة مثل LaTeX أو أسهم المعادلات (مثل $\\rightarrow$). اكتب بلغة عربية سلسة وواضحة فقط.\n"
+    "3. لا تستخدم أية رموز رياضية أو لغات تنسيق غريبة مثل LaTeX أو أسهم المعادلات. اكتب بلغة عربية سلسة وواضحة فقط.\n"
     "4. تذكر دائماً أجزاء المحادثة السابقة لتجيب بذكاء ودقة إذا طلب الطالب إعادة الشرح أو الاستفسار عن نقطة سابقة."
 )
 
@@ -30,15 +30,15 @@ def chat():
         if not messages_history:
             return jsonify({'error': 'الرجاء كتابة سؤال'}), 400
 
-        # تجهيز المحادثة مع تعليمات النظام
         formatted_contents = [{"role": "user", "parts": [{"text": SYSTEM_INSTRUCTION}]}]
         formatted_contents.extend(messages_history)
 
         max_retries = 3
         for attempt in range(max_retries):
             try:
+                # استخدام النموذج المستقر لمنع أخطاء الأسماء
                 response = client.models.generate_content(
-                    model='gemini-2.5-flash',
+                    model='gemini-1.5-flash',
                     contents=formatted_contents
                 )
                 return jsonify({'response': response.text})
@@ -51,7 +51,7 @@ def chat():
                 else:
                     if "503" in err_str or "UNAVAILABLE" in err_str:
                         return jsonify({'response': '⚠️ الخادم مشغول حالياً، يرجى إعادة المحاولة بعد ثوانٍ.'})
-                    return jsonify({'response': 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى.'})
+                    return jsonify({'response': f'حدث خطأ في النظام: {err_str}'})
 
     except Exception as e:
         return jsonify({'response': 'تعذر معالجة الطلب حالياً.'}), 500
