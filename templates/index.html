@@ -174,7 +174,6 @@
             padding: 20px;
             cursor: pointer;
             transition: all 0.2s ease;
-            position: relative;
         }
 
         .q-card:hover {
@@ -210,18 +209,37 @@
             border-radius: 16px;
             padding: 30px;
             margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .start-quiz-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .start-quiz-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
+        }
+
+        .quiz-container {
+            display: none;
+            text-align: right;
+            margin-top: 25px;
         }
 
         .quiz-q {
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border);
-        }
-
-        .quiz-q:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
         }
 
         .quiz-q p {
@@ -437,61 +455,63 @@
 
         <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
         <div class="questions-grid">
-            <div class="q-card" onclick="askAiQuestion('ما الفرق بين الاستجابة والتكيف؟ اشرح لي بالتفصيل.')">
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين الاستجابة والتكيف؟')">
                 <div class="q-title">س: ما الفرق بين الاستجابة والتكيف؟</div>
                 <div class="q-ans">الاستجابة رد فعل موقت ومباشر لمثير ما، بينما التكيف ملاءمة موروثة تمكن المخلوق من البقاء عبر الأجيال.</div>
             </div>
-            <div class="q-card" onclick="askAiQuestion('لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟ اشرح لي التفاصيل.')">
+            <div class="q-card" onclick="askAiQuestion('لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟')">
                 <div class="q-title">س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</div>
                 <div class="q-ans">لأنها تفتقر لباقي خصائص الحياة مثل الخلية، التكاثر، الاتزان الداخلي، والتكيف.</div>
             </div>
-            <div class="q-card" onclick="askAiQuestion('ما أهمية التكاثر للمخلوق الحي؟ اشرح لي ذلك.')">
+            <div class="q-card" onclick="askAiQuestion('ما أهمية التكاثر للمخلوق الحي؟')">
                 <div class="q-title">س: ما أهمية التكاثر للمخلوق الحي؟</div>
                 <div class="q-ans">أساسي لحفظ النوع بأكمله من الانقراض وليس لحياة الفرد بمفرده.</div>
             </div>
         </div>
 
         <div class="quiz-section">
-            <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
-            
-            <div class="quiz-q" data-explanation="التبرير: الاتزان الداخلي هو تنظيم الظروف الداخلية للمخلوق الحي للحفاظ على حياته واستقراره الفسيولوجي.">
-                <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) التكيف</button>
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الاتزان الداخلي</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النمو</button>
-                </div>
-                <div class="explanation-box"></div>
-            </div>
+            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
 
-            <div class="quiz-q" data-explanation="التبرير: الحركة المفاجئة لأسراب الأسماك عند التهديد هي رد فعل سريع ومباشر لمؤثر خارجي (الخطر) وتسمى استجابة.">
-                <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) الاستجابة للمثيرات</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التعضي</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) التكيف</button>
+            <div class="quiz-container">
+                <div class="quiz-q" data-explanation="التبرير العلمي: الاتزان الداخلي هو تنظيم الظروف الداخلية للمخلوق الحي للحفاظ على حياته واستقراره الفسيولوجي.">
+                    <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) التكيف</button>
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الاتزان الداخلي</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النمو</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
-            </div>
 
-            <div class="quiz-q" data-explanation="التبرير: الخلية هي أصغر وحدة بناء وتركيب تؤدي كافة الوظائف الحيوية في أجهزة الكائنات الحية.">
-                <p>3. أي من التالي يُعد الوحدة الأساسية للتركيب والوظيفة في جميع المخلوقات الحية؟</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) العضو</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) النسيج</button>
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) الخلية</button>
+                <div class="quiz-q" data-explanation="التبرير العلمي: الحركة المفاجئة لأسراب الأسماك عند التهديد هي رد فعل سريع ومباشر لمؤثر خارجي وتسمى استجابة.">
+                    <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) الاستجابة للمثيرات</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التعضي</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) التكيف</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
-            </div>
 
-            <div class="quiz-q" data-explanation="التبرير: تحوير الأوراق لأشواك هي صفة موروثة تطورت لتلائم بيئة الصحراء الجافة وتقليل بخر الماء.">
-                <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل فقدان الماء يُعد مثالاً على:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) التكيف</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التكاثر</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الاتزان الداخلي</button>
+                <div class="quiz-q" data-explanation="التبرير العلمي: الخلية هي أصغر وحدة بناء وتركيب تؤدي كافة الوظائف الحيوية في أجهزة الكائنات الحية.">
+                    <p>3. أي من التالي يُعد الوحدة الأساسية للتركيب والوظيفة في جميع المخلوقات الحية؟</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) العضو</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) النسيج</button>
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) الخلية</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
+
+                <div class="quiz-q" data-explanation="التبرير العلمي: تحوير الأوراق لأشواك هي صفة موروثة تطورت لتلائم بيئة الصحراء الجافة وتقليل بخر الماء.">
+                    <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل فقدان الماء يُعد مثالاً على:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) التكيف</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التكاثر</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الاتزان الداخلي</button>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -521,11 +541,11 @@
 
         <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
         <div class="questions-grid">
-            <div class="q-card" onclick="askAiQuestion('ما الفرق بين المتغير المستقل والمتغير التابع؟ اشرح لي مع أمثلة.')">
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين المتغير المستقل والمتغير التابع؟')">
                 <div class="q-title">س: ما الفرق بين المتغير المستقل والمتغير التابع؟</div>
                 <div class="q-ans">المتغير المستقل يُغيره الباحث، بينما المتغير التابع يتغير تبعاً له ويتم قياسه.</div>
             </div>
-            <div class="q-card" onclick="askAiQuestion('ما أهمية المجموعة الضابطة في التجربة؟ اشرح لي ذلك.')">
+            <div class="q-card" onclick="askAiQuestion('ما أهمية المجموعة الضابطة في التجربة؟')">
                 <div class="q-title">س: ما أهمية المجموعة الضابطة في التجربة؟</div>
                 <div class="q-ans">تُستخدم معياراً للمقارنة لمعرفة مدى تأثير المتغير المستقل.</div>
             </div>
@@ -536,46 +556,48 @@
         </div>
 
         <div class="quiz-section">
-            <div class="section-title">📝 بنك الاختبارات التفاعلية (اختر الإجابة الصحيحة)</div>
-            
-            <div class="quiz-q" data-explanation="التبرير: المتغير المستقل هو العامل الذي يتحكم فيه الباحث ويقوم بتغييره لمعرفة مدى تأثيره على النتائج.">
-                <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) المتغير المستقل</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) المتغير التابع</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) المجموعة الضابطة</button>
-                </div>
-                <div class="explanation-box"></div>
-            </div>
+            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
 
-            <div class="quiz-q" data-explanation="التبرير: المجموعة الضابطة تبقى تحت ظروف طبيعية دون تغير لتعطي أساساً أو معياراً نقارن به نتائج المجموعة التجريبية.">
-                <p>2. المجموعة التي تُستخدم للمقارنة في التجربة ولا يُجرى عليها أي تغيير هي:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) المجموعة التجريبية</button>
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) المجموعة الضابطة</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الفرضية</button>
+            <div class="quiz-container">
+                <div class="quiz-q" data-explanation="التبرير العلمي: المتغير المستقل هو العامل الذي يتحكم فيه الباحث ويقوم بتغييره لمعرفة مدى تأثيره على النتائج.">
+                    <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) المتغير المستقل</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) المتغير التابع</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) المجموعة الضابطة</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
-            </div>
 
-            <div class="quiz-q" data-explanation="التبرير: الفرضية هي اقتراح أو تفسير مؤقت ظاهري يصوغه الباحث ويكون قابلاً للاختبار بالتجربة.">
-                <p>3. صياغة تفسير قابل للاختبار يُعرف بـ:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الملاحظة</button>
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الفرضية</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النظرية</button>
+                <div class="quiz-q" data-explanation="التبرير العلمي: المجموعة الضابطة تبقى تحت ظروف طبيعية دون تغير لتعطي أساساً أو معياراً نقارن به نتائج المجموعة التجريبية.">
+                    <p>2. المجموعة التي تُستخدم للمقارنة في التجربة ولا يُجرى عليها أي تغيير هي:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) المجموعة التجريبية</button>
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) المجموعة الضابطة</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الفرضية</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
-            </div>
 
-            <div class="quiz-q" data-explanation="التبرير: مراجعة الأقران تضمن المصداقية والدقة العلمية للأبحاث قبل اعتمادها ونشرها للمجتمع العلمي.">
-                <p>4. فحص الأبحاث بواسطة علماء في نفس التخصص قبل إعلانها يُسمى:</p>
-                <div class="options">
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الاستنتاج</button>
-                    <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التجريب</button>
-                    <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) مراجعة الأقران</button>
+                <div class="quiz-q" data-explanation="التبرير العلمي: الفرضية هي اقتراح أو تفسير مؤقت ظاهري يصوغه الباحث ويكون قابلاً للاختبار بالتجربة.">
+                    <p>3. صياغة تفسير قابل للاختبار يُعرف بـ:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الملاحظة</button>
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الفرضية</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النظرية</button>
+                    </div>
+                    <div class="explanation-box"></div>
                 </div>
-                <div class="explanation-box"></div>
+
+                <div class="quiz-q" data-explanation="التبرير العلمي: مراجعة الأقران تضمن المصداقية والدقة العلمية للأبحاث قبل اعتمادها ونشرها للمجتمع العلمي.">
+                    <p>4. فحص الأبحاث بواسطة علماء في نفس التخصص قبل إعلانها يُسمى:</p>
+                    <div class="options">
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الاستنتاج</button>
+                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التجريب</button>
+                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) مراجعة الأقران</button>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
             </div>
         </div>
     </div>
@@ -589,16 +611,15 @@
         <button class="close-chat" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-body" id="chatBody">
-        <div class="msg bot">مرحباً بك! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة أو مفهوم لم تفهمه وسأشرحه لك بالتفصيل!</div>
+        <div class="msg bot">مرحباً بك! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة أو مفهوم وسأجيبك باختصار ووضوح!</div>
     </div>
     <div class="chat-footer">
-        <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا...">
+        <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter') sendAiMessage()">
         <button onclick="sendAiMessage()">إرسال</button>
     </div>
 </div>
 
 <script>
-    // مصفوفة لتخزين سجل المحادثة للذاكرة
     let chatHistory = [];
 
     function switchLesson(lessonId, btn) {
@@ -606,6 +627,12 @@
         document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
         document.getElementById(lessonId).classList.add('active');
         btn.classList.add('active');
+    }
+
+    function startQuiz(btn) {
+        btn.style.display = 'none';
+        const quizContainer = btn.nextElementSibling;
+        quizContainer.style.display = 'block';
     }
 
     function checkAnswer(btn) {
@@ -640,7 +667,7 @@
             });
 
             explanationBox.style.borderRightColor = '#ef4444';
-            explanationBox.innerHTML = `❌ <strong>إجابة خاطئة.</strong> الإجابة الصحيحة موضحة باللون الأخضر.<br>${questionCard.dataset.explanation}`;
+            explanationBox.innerHTML = `❌ <strong>إجابة خاطئة.</strong> الإجابة الصحيحة باللون الأخضر.<br>${questionCard.dataset.explanation}`;
         }
 
         explanationBox.style.display = 'block';
@@ -654,7 +681,6 @@
     function askAiQuestion(questionText) {
         const modal = document.getElementById('chatModal');
         modal.style.display = 'flex';
-        
         const input = document.getElementById('chatInput');
         input.value = questionText;
         sendAiMessage();
@@ -667,16 +693,11 @@
 
         if(!text) return;
 
-        // عرض رسالة المستخدم في الواجهة
         body.innerHTML += `<div class="msg user">${text}</div>`;
         input.value = '';
         body.scrollTop = body.scrollHeight;
 
-        // إضافة رسالة المستخدم لسجل المحادثة
-        chatHistory.push({
-            role: "user",
-            parts: [{ text: text }]
-        });
+        chatHistory.push({ role: "user", parts: [{ text: text }] });
 
         try {
             const res = await fetch('/api/chat', {
@@ -687,18 +708,12 @@
             const data = await res.json();
             const reply = data.response || data.error || 'عذراً، حدث خطأ.';
             
-            // عرض رد الذكاء الاصطناعي
             body.innerHTML += `<div class="msg bot">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
 
-            // حفظ رد الذكاء الاصطناعي في الذاكرة
-            chatHistory.push({
-                role: "model",
-                parts: [{ text: reply }]
-            });
-
+            chatHistory.push({ role: "model", parts: [{ text: reply }] });
         } catch(e) {
-            body.innerHTML += `<div class="msg bot">تعذر الاتصال بالذكاء الاصطناعي حالياً، يرجى إعادة المحاولة.</div>`;
+            body.innerHTML += `<div class="msg bot">تعذر الاتصال بالذكاء الاصطناعي حالياً.</div>`;
         }
     }
 </script>
