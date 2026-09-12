@@ -5,7 +5,7 @@ from google import genai
 
 app = Flask(__name__)
 
-# تهيئة عميل جوجل للذكاء الاصطناعي
+# تهيئة العميل (سيقرأ تلقائياً GEMINI_API_KEY من متغيرات البيئة)
 client = genai.Client()
 
 SYSTEM_INSTRUCTION = (
@@ -36,22 +36,26 @@ def chat():
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                # استخدام النموذج الرسمي المعتمد
+                # استخدام النموذج الرسمي المعتمد gemini-1.5-flash أو gemini-2.0-flash
                 response = client.models.generate_content(
-                    model='gemini-2.5-flash',
+                    model='gemini-2.0-flash',
                     contents=formatted_contents
                 )
                 return jsonify({'response': response.text})
 
             except Exception as err:
                 err_str = str(err)
+                print(f"Error detail: {err_str}") # لطباعة التفاصيل في الـ logs للتأكد
+                
                 if ("503" in err_str or "UNAVAILABLE" in err_str) and attempt < max_retries - 1:
                     time.sleep(2)
                     continue
                 else:
                     if "503" in err_str or "UNAVAILABLE" in err_str:
                         return jsonify({'response': '⚠️ الخادم مشغول حالياً، يرجى إعادة المحاولة بعد ثوانٍ.'})
-                    return jsonify({'response': 'تعذر الاتصال بالذكاء الاصطناعي، يرجى المحاولة مرة أخرى.'})
+                    
+                    # طباعة الخطأ الحقيقي للمساعدة في التشخيص إذا استمرت المشكلة
+                    return jsonify({'response': f'تعذر الاتصال: {err_str}'})
 
     except Exception as e:
         return jsonify({'response': 'تعذر معالجة الطلب حالياً.'}), 500
