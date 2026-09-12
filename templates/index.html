@@ -598,6 +598,9 @@
 </div>
 
 <script>
+    // مصفوفة لتخزين سجل المحادثة للذاكرة
+    let chatHistory = [];
+
     function switchLesson(lessonId, btn) {
         document.querySelectorAll('.lesson-content').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
@@ -611,7 +614,6 @@
         const explanationBox = questionCard.querySelector('.explanation-box');
         const isCorrect = btn.getAttribute('data-correct') === 'true';
 
-        // إعادة ضبط الأزرار
         options.forEach(b => {
             b.style.backgroundColor = '#0f172a';
             b.style.borderColor = 'var(--border)';
@@ -619,19 +621,16 @@
         });
 
         if (isCorrect) {
-            // إجابة صحيحة
             btn.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
             btn.style.borderColor = 'var(--accent)';
             btn.style.color = '#10b981';
             explanationBox.style.borderRightColor = 'var(--accent)';
             explanationBox.innerHTML = `✅ <strong>إجابة صحيحة!</strong><br>${questionCard.dataset.explanation}`;
         } else {
-            // إجابة خاطئة
             btn.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
             btn.style.borderColor = '#ef4444';
             btn.style.color = '#ef4444';
 
-            // تظليل الإجابة الصحيحة بالأخضر
             options.forEach(b => {
                 if (b.getAttribute('data-correct') === 'true') {
                     b.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
@@ -668,22 +667,38 @@
 
         if(!text) return;
 
+        // عرض رسالة المستخدم في الواجهة
         body.innerHTML += `<div class="msg user">${text}</div>`;
         input.value = '';
         body.scrollTop = body.scrollHeight;
+
+        // إضافة رسالة المستخدم لسجل المحادثة
+        chatHistory.push({
+            role: "user",
+            parts: [{ text: text }]
+        });
 
         try {
             const res = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: text })
+                body: JSON.stringify({ history: chatHistory })
             });
             const data = await res.json();
             const reply = data.response || data.error || 'عذراً، حدث خطأ.';
+            
+            // عرض رد الذكاء الاصطناعي
             body.innerHTML += `<div class="msg bot">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
+
+            // حفظ رد الذكاء الاصطناعي في الذاكرة
+            chatHistory.push({
+                role: "model",
+                parts: [{ text: reply }]
+            });
+
         } catch(e) {
-            body.innerHTML += `<div class="msg bot">تعذر الاتصال بالذكاء الاصطناعي حالياً.</div>`;
+            body.innerHTML += `<div class="msg bot">تعذر الاتصال بالذكاء الاصطناعي حالياً، يرجى إعادة المحاولة.</div>`;
         }
     }
 </script>
