@@ -36,9 +36,9 @@ def chat():
         max_retries = 3
         for attempt in range(max_retries):
             try:
-                # استخدام النموذج المستقر لمنع أخطاء الأسماء
+                # استخدام النموذج الرسمي المعتمد
                 response = client.models.generate_content(
-                    model='gemini-1.5-flash',
+                    model='gemini-2.5-flash',
                     contents=formatted_contents
                 )
                 return jsonify({'response': response.text})
@@ -51,7 +51,7 @@ def chat():
                 else:
                     if "503" in err_str or "UNAVAILABLE" in err_str:
                         return jsonify({'response': '⚠️ الخادم مشغول حالياً، يرجى إعادة المحاولة بعد ثوانٍ.'})
-                    return jsonify({'response': f'حدث خطأ في النظام: {err_str}'})
+                    return jsonify({'response': 'تعذر الاتصال بالذكاء الاصطناعي، يرجى المحاولة مرة أخرى.'})
 
     except Exception as e:
         return jsonify({'response': 'تعذر معالجة الطلب حالياً.'}), 500
