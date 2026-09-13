@@ -8,7 +8,7 @@
     <style>
         :root {
             --bg-dark: #0b0f19;
-            --card-bg: rgba(22, 31, 48, 0.8);
+            --card-bg: rgba(22, 31, 48, 0.85);
             --primary: #38bdf8;
             --accent: #10b981;
             --text-main: #f8fafc;
@@ -40,18 +40,22 @@
 
         .summary-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; line-height: 1.8; margin-bottom: 30px; }
         .summary-card h3 { color: var(--primary); font-size: 1.3rem; margin: 20px 0 10px 0; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
-        .summary-card ul { padding-right: 25px; color: #cbd5e1; }
+        .summary-card h3:first-child { margin-top: 0; }
+        .summary-card ul { padding-right: 25px; color: #cbd5e1; margin-bottom: 15px; }
+        .summary-card p { color: #cbd5e1; margin-bottom: 10px; }
 
-        .section-title { font-size: 1.4rem; margin-bottom: 15px; }
-        .questions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 30px; }
-        .q-card { background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); border-right: 4px solid var(--accent); border-radius: 12px; padding: 20px; cursor: pointer; }
-        .q-card::after { content: "💬 اضغط لمناقشة السؤال مع AI"; display: block; margin-top: 10px; font-size: 0.8rem; color: var(--primary); }
+        .section-title { font-size: 1.3rem; margin-bottom: 15px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+        .questions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .q-card { background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); border-right: 4px solid var(--accent); border-radius: 12px; padding: 16px 20px; cursor: pointer; transition: 0.2s; }
+        .q-card:hover { background: rgba(30, 41, 59, 0.9); transform: translateY(-2px); }
+        .q-card::after { content: "💬 اضغط لمناقشة السؤال مع الذكاء الاصطناعي"; display: block; margin-top: 8px; font-size: 0.8rem; color: var(--primary); }
 
         .quiz-section { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 40px; text-align: center; }
         .start-quiz-btn, .finish-quiz-btn {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; padding: 14px 35px;
             font-size: 1.1rem; font-weight: 800; border-radius: 12px; cursor: pointer; transition: 0.3s;
         }
+        .start-quiz-btn:hover, .finish-quiz-btn:hover { opacity: 0.9; }
         .quiz-container { display: none; text-align: right; margin-top: 25px; }
         .quiz-q { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
         .quiz-q p { font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; }
@@ -71,8 +75,8 @@
         }
 
         /* AI Floating Modal */
-        .ai-fab { position: fixed; bottom: 30px; left: 30px; width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #fff; font-weight: 800; font-size: 1.3rem; cursor: pointer; border: none; z-index: 1000; }
-        .chat-modal { position: fixed; bottom: 105px; left: 30px; width: 380px; height: 500px; background-color: #0f172a; border: 1px solid var(--border); border-radius: 16px; display: none; flex-direction: column; z-index: 1000; overflow: hidden; }
+        .ai-fab { position: fixed; bottom: 30px; left: 30px; width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #fff; font-weight: 800; font-size: 1.3rem; cursor: pointer; border: none; z-index: 1000; box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4); }
+        .chat-modal { position: fixed; bottom: 105px; left: 30px; width: 380px; height: 500px; background-color: #0f172a; border: 1px solid var(--border); border-radius: 16px; display: none; flex-direction: column; z-index: 1000; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .chat-header { background-color: #1e293b; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
         .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
         .msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.95rem; line-height: 1.6; white-space: pre-line; }
@@ -99,51 +103,89 @@
         <button class="nav-btn" onclick="switchLesson('lesson2', this)">2️⃣ درس: طبيعة العلم وطرائقه</button>
     </div>
 
-    <!-- الدرس الأول -->
+    <!-- ===================== الدرس الأول ===================== -->
     <div id="lesson1" class="lesson-content active">
         <div class="summary-card">
-            <h3>📑 تلخيص شامل: مدخل إلى علم الأحياء</h3>
-            <p><span style="color:var(--primary); font-weight:bold;">علم الأحياء:</span> يدرس أصل الحياة وتاريخها، وتركيب المخلوقات الحية وظائفها وتفاعلها مع بيئاتها.</p>
-            <h3>🧬 الخصائص الأساسية للمخلوقات الحية:</h3>
+            <h3>📑 التلخيص الشامل: مدخل إلى علم الأحياء</h3>
+            <p><span style="color:var(--primary); font-weight:bold;">تعريف علم الأحياء:</span> هو العلم الذي يهتم بدراسة أصل الحياة، وتاريخها، وكل ما كان حياً يوماً ما، وتركيب المخلوقات الحية، ووظائفها، وكيف تتفاعل مع بعضها ومع البيئة.</p>
+
+            <h3>👨‍🔬 أهم دور يقوم به علماء الأحياء:</h3>
             <ul>
-                <li>مكون من خلية أو أكثر.</li>
-                <li>إظهار التنظيم (التعضي).</li>
-                <li>النمو والتكاثر.</li>
-                <li>الحاجة إلى الطاقة والاستجابة للمثيرات.</li>
-                <li>المحافظة على الاتزان الداخلي والتكيف.</li>
+                <li><strong>دراسة تنوع الحياة:</strong> التعرف على خصائص المخلوقات الحية وسلوكياتها.</li>
+                <li><strong>البحث في الأمراض:</strong> معرفة مسببات الأمراض وطرق الوقاية منها وتطوير الأدوية.</li>
+                <li><strong>تطوير التقنيات:</strong> تطبيق المعرفة العلمية لإنتاج أدوات مفيدة مثل تحسين السلالات الزراعية.</li>
+                <li><strong>حماية البيئة:</strong> الحفاظ على الأنواع المهددة بالانقراض وحماية الموائل الطبيعية.</li>
+            </ul>
+
+            <h3>🧬 الخصائص الثماني للمخلوقات الحية:</h3>
+            <ul>
+                <li><strong>مكون من خلية أو أكثر:</strong> الخلية هي وحدة التركيب والوظيفة الأساسية.</li>
+                <li><strong>إظهار التنظيم (التعضي):</strong> تنظيم مستويات الخلايا إلى أنسجة، أعضاء، وأجهزة.</li>
+                <li><strong>النمو:</strong> زيادة في كتلة المادة الحية وتكوين تركيبات جديدة.</li>
+                <li><strong>التكاثر:</strong> إنتاج أفراد جديدة للحفاظ على النوع من الانقراض.</li>
+                <li><strong>الحاجة إلى الطاقة:</strong> التغذي للحصول على الطاقة اللازمة للأنشطة الحيوية.</li>
+                <li><strong>الاستجابة للمثيرات:</strong> رد الفعل السريع للمؤثرات الداخلية أو الخارجية.</li>
+                <li><strong>المحافظة على الاتزان الداخلي:</strong> تنظيم البيئة الداخلية لتوفير ظروف مجهزة للبقاء.</li>
+                <li><strong>التكيف:</strong> ملاءمة تركيبية أو سلوكية تمكن المخلوق من التأقلم في بيئته.</li>
             </ul>
         </div>
 
-        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط لمناقشتها مع AI)</div>
+        <div class="section-title">💡 أسئلة مقترحة للمناقشة مع الذكاء الاصطناعي</div>
         <div class="questions-grid">
             <div class="q-card" onclick="askAiQuestion('ما الفرق بين الاستجابة والتكيف؟')">
-                <strong>س: ما الفرق بين الاستجابة والتكيف؟</strong>
+                <strong>س: ما الفرق بين الاستجابة والتكيف مع إعطاء أمثلة؟</strong>
             </div>
             <div class="q-card" onclick="askAiQuestion('لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟')">
-                <strong>س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</strong>
+                <strong>س: لماذا لا تُعد البلورات مخلوقات حية رغم زيادة حجمها؟</strong>
+            </div>
+            <div class="q-card" onclick="askAiQuestion('كيف يسهم علم الأحياء في تطوير المجال الطبي؟')">
+                <strong>س: كيف يسهم علماء الأحياء في مكافحة الأمراض وتطوير اللقاحات؟</strong>
+            </div>
+            <div class="q-card" onclick="askAiQuestion('ما أهمية خاصية الاتزان الداخلي للبقاء؟')">
+                <strong>س: ما أهمية الاتزان الداخلي وكيف يحافظ الجسم عليه؟</strong>
             </div>
         </div>
 
         <div class="quiz-section">
-            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
+            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي للدرس الأول</button>
 
             <div class="quiz-container" id="quiz1">
-                <div class="quiz-q" data-correct="1" data-exp="التبرير العلمي: الاتزان الداخلي هو عملية تنظيم الظروف الداخلية للمخلوق الحي لضمان استقراره وبقائه على قيد الحياة.">
-                    <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
+                <div class="quiz-q" data-correct="1" data-exp="التبرير العلمي: الاتزان الداخلي هو آلية حيوية تُنظم الظروف الداخلية للمخلوق الحي (مثل درجة الحرارة ونسبة الماء) لضمان استمرار عمل أجهزة الجسم بنجاح.">
+                    <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان استقراره وبقائه يُسمى:</p>
                     <div class="options-group">
                         <label class="opt-label"><input type="radio" name="l1_q1" value="0"> أ) التكيف</label>
                         <label class="opt-label"><input type="radio" name="l1_q1" value="1"> ب) الاتزان الداخلي</label>
-                        <label class="opt-label"><input type="radio" name="l1_q1" value="2"> ج) النمو</label>
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="2"> ج) التعضي</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
 
-                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: الحركة المفاجئة لأسراب الأسماك عند شعورها بالخطر تُعتبر رد فعل سريع ومباشر لمؤثر خارجي وهو ما يُعرف بالاستجابة.">
-                    <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
+                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: ابتعاد المخلوق أو استجابته المفاجئة للمؤثرات البيئية تُعد رد فعل مباشر وسريع يُعرف بالاستجابة للمثيرات.">
+                    <p>2. ابتعاد حيوان فجأة عند سماع صوت قوي يُعبر عن خاصية:</p>
                     <div class="options-group">
                         <label class="opt-label"><input type="radio" name="l1_q2" value="0"> أ) الاستجابة للمثيرات</label>
-                        <label class="opt-label"><input type="radio" name="l1_q2" value="1"> ب) التعضي</label>
-                        <label class="opt-label"><input type="radio" name="l1_q2" value="2"> ج) التكيف</label>
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="1"> ب) التكيف السلوكي</label>
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="2"> ج) المحافظة على الطاقة</label>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
+
+                <div class="quiz-q" data-correct="2" data-exp="التبرير العلمي: التكاثر خاصية مخصصة للحفاظ على نوع الكائن الحي من الانقراض، ولكنها ليست شرطاً مباشراً لاستمرار حياة الفرد نفسه.">
+                    <p>3. الخاصية التي تضمن استمرار النوع ومنعه من الانقراض هي:</p>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l1_q3" value="0"> أ) النمو</label>
+                        <label class="opt-label"><input type="radio" name="l1_q3" value="1"> ب) التعضي</label>
+                        <label class="opt-label"><input type="radio" name="l1_q3" value="2"> ج) التكاثر</label>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
+
+                <div class="quiz-q" data-correct="1" data-exp="التبرير العلمي: نمو البلورات أو النار يتم بإضافة مواد من الخارج، بينما نمو المخلوق الحي ينتج عن زيادة كتلته الحية من الداخل وانقسام خلاياه.">
+                    <p>4. سبب عدم اعتبار نمو البلورات نمواً حياً هو أن نموها يتم عن طريق:</p>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l1_q4" value="0"> أ) الانقسام الخلوي</label>
+                        <label class="opt-label"><input type="radio" name="l1_q4" value="1"> ب) الترسب الخارجي للمواد</label>
+                        <label class="opt-label"><input type="radio" name="l1_q4" value="2"> ج) استهلاك الطاقة الداخلية</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
@@ -154,23 +196,87 @@
         </div>
     </div>
 
-    <!-- الدرس الثاني -->
+    <!-- ===================== الدرس الثاني ===================== -->
     <div id="lesson2" class="lesson-content">
         <div class="summary-card">
-            <h3>📑 تلخيص شامل: طبيعة العلم وطرائقه</h3>
-            <p><span style="color:var(--primary); font-weight:bold;">العلم الطبيعي:</span> بناء من المعرفة يدرس الطبيعة المعتمدة على الملاحظة والتجريب.</p>
+            <h3>📑 التلخيص الشامل: طبيعة العلم وطرائقه</h3>
+            <p><span style="color:var(--primary); font-weight:bold;">مفهوم العلم الطبيعي (التجريبي):</span> هو بناء متكامل من المعرفة يعتمد على دراسة الطبيعة من خلال الملاحظة والتجريب وتطبيق المنهج العلمي.</p>
+
+            <h3>⚙️ خصائص العلم الطبيعي:</h3>
+            <ul>
+                <li><strong>يعتمد على الدليل:</strong> يصوغ نظريات تفسر الظواهر بناءً على الأدلة والبيانات المجمعة.</li>
+                <li><strong>ينشط البحث العلمي:</strong> يثير أسئلة جديدة ويحفز العلماء على التوسع في الاكتشاف.</li>
+                <li><strong>يختبر الاستنتاجات:</strong> يخضع الملاحظات للتجارب المتكررة للتأكد من صحتها.</li>
+                <li><strong>يطرح أسئلة وملاحظات:</strong> يستند إلى التساؤل المستمر والتفكير الناقد.</li>
+                <li><strong>يتحدى النظريات المقبولة:</strong> يرحب بالتعديل والتحديث عند ظهور أدلة علمية أقوى.</li>
+            </ul>
+
+            <h3>🔬 خطوات المنهج العلمي:</h3>
+            <ul>
+                <li><strong>الملاحظة وسؤال البحث:</strong> جمع المعلومات باستخدام الحواس وطرح المشكلة.</li>
+                <li><strong>صياغة الفرضية:</strong> تفسير قابل للاختبار العلمي.</li>
+                <li><strong>تصميم التجربة:</strong> اختبار الفرضية مع تحديد المتغيرات (مستقل، تابع، وضابط).</li>
+                <li><strong>جمع البيانات وتحليلها:</strong> تسجيل البيانات الكمية (أرقام) والنوعية (وصف).</li>
+                <li><strong>استخلاص النظريات والتوصيات:</strong> التوصل إلى نتائج ودعم الفرضية أو تعديلها.</li>
+            </ul>
+        </div>
+
+        <div class="section-title">💡 أسئلة مقترحة للمناقشة مع الذكاء الاصطناعي</div>
+        <div class="questions-grid">
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين المتغير المستقل والمتغير التابع؟')">
+                <strong>س: ما الفرق بين المتغير المستقل والمتغير التابع في التجربة؟</strong>
+            </div>
+            <div class="q-card" onclick="askAiQuestion('لماذا تعتبر المراجعة العلمية العلمية مهمة للبحوث؟')">
+                <strong>س: ما أهمية مراجعة الأقران والعلماء الآخرين للبحوث والنتائج؟</strong>
+            </div>
+            <div class="q-card" onclick="askAiQuestion('ما أهمية المجموعة الضابطة في التجربة العلمية؟')">
+                <strong>س: ما فائدة وجود المجموعة الضابطة عند إجراء التجربة؟</strong>
+            </div>
+            <div class="q-card" onclick="askAiQuestion('ما الفرق بين البيانات الكمية والبيانات النوعية؟')">
+                <strong>س: ما الفرق بين البيانات الكمية والنوعية مع إعطاء أمثلة؟</strong>
+            </div>
         </div>
 
         <div class="quiz-section">
-            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
+            <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي للدرس الثاني</button>
 
             <div class="quiz-container" id="quiz2">
-                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: المتغير المستقل هو العامل الذي يُغيره الباحث عمداً في التجربة لمعرفة مدى تأثيره.">
-                    <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
+                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: المتغير المستقل هو العامل الذي يقوم الباحث بتغييره وتعديله عمداً ليرى مدى تأثيره على التجربة.">
+                    <p>1. العامل الذي يختبره الباحث ويقوم بتغييره عمداً في التجربة هو:</p>
                     <div class="options-group">
                         <label class="opt-label"><input type="radio" name="l2_q1" value="0"> أ) المتغير المستقل</label>
                         <label class="opt-label"><input type="radio" name="l2_q1" value="1"> ب) المتغير التابع</label>
-                        <label class="opt-label"><input type="radio" name="l2_q1" value="2"> ج) المجموعة الضابطة</label>
+                        <label class="opt-label"><input type="radio" name="l2_q1" value="2"> ج) العامل الثابت</label>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
+
+                <div class="quiz-q" data-correct="1" data-exp="التبرير العلمي: المتغير التابع يعتمد في قيمته وتغيره على التأثير الذي أحدثه المتغير المستقل.">
+                    <p>2. المتغير الذي ينتج عن التغير في المتغير المستقل ويعتمد عليه يُسمى:</p>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l2_q2" value="0"> أ) المتغير المستقل</label>
+                        <label class="opt-label"><input type="radio" name="l2_q2" value="1"> ب) المتغير التابع</label>
+                        <label class="opt-label"><input type="radio" name="l2_q2" value="2"> ج) المجموعة الضابطة</label>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
+
+                <div class="quiz-q" data-correct="2" data-exp="التبرير العلمي: تُستخدم المجموعة الضابطة للمقارنة مع المجموعة التجريبية للتأكد من أن النتائج تعود للمتغير المدروس فقط.">
+                    <p>3. عينة تُستخدم للمقارنة ولا يتم تعريضها للعامل المراد اختباره تُعرف بـ:</p>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l2_q3" value="0"> أ) المجموعة التجريبية</label>
+                        <label class="opt-label"><input type="radio" name="l2_q3" value="1"> ب) العينة المتغيرة</label>
+                        <label class="opt-label"><input type="radio" name="l2_q3" value="2"> ج) المجموعة الضابطة</label>
+                    </div>
+                    <div class="explanation-box"></div>
+                </div>
+
+                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: البيانات الكمية هي بيانات رقمية مقاسة مثل الطول، الوزن، والدرجة، بينما الوصفية غير رقمية.">
+                    <p>4. قياس الطول، الوزن، ودرجة الحرارة تُعتبر من البيانات:</p>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l2_q4" value="0"> أ) الكمية</label>
+                        <label class="opt-label"><input type="radio" name="l2_q4" value="1"> ب) النوعية (الوصفية)</label>
+                        <label class="opt-label"><input type="radio" name="l2_q4" value="2"> ج) الافتراضية</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
