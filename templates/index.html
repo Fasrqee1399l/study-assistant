@@ -10,400 +10,77 @@
             --bg-dark: #0b0f19;
             --card-bg: rgba(22, 31, 48, 0.8);
             --primary: #38bdf8;
-            --primary-hover: #0284c7;
             --accent: #10b981;
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: #1e293b;
         }
 
-        * {
-            box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            padding: 30px 15px;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1000px;
-        }
+        * { box-sizing: border-box; font-family: 'Tajawal', sans-serif; margin: 0; padding: 0; }
+        body { background-color: var(--bg-dark); color: var(--text-main); padding: 30px 15px; min-height: 100vh; display: flex; justify-content: center; }
+        .container { width: 100%; max-width: 1000px; }
 
         .student-header {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border: 1px solid #334155;
-            border-right: 5px solid var(--primary);
-            border-radius: 16px;
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            border: 1px solid #334155; border-right: 5px solid var(--primary);
+            border-radius: 16px; padding: 20px 25px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
         }
+        .student-info h2 { font-size: 1.5rem; color: var(--text-main); }
+        .student-info p { color: var(--primary); font-size: 0.95rem; margin-top: 4px; }
 
-        .student-info h2 {
-            font-size: 1.5rem;
-            color: var(--text-main);
-            font-weight: 700;
-        }
-
-        .student-info p {
-            color: var(--primary);
-            font-size: 0.95rem;
-            margin-top: 4px;
-        }
-
-        .lesson-nav {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
+        .lesson-nav { display: flex; gap: 15px; margin-bottom: 25px; }
         .nav-btn {
-            flex: 1;
-            padding: 16px 20px;
-            background-color: var(--card-bg);
-            border: 2px solid var(--border);
-            color: var(--text-muted);
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
+            flex: 1; padding: 16px 20px; background-color: var(--card-bg); border: 2px solid var(--border);
+            color: var(--text-muted); border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s;
         }
+        .nav-btn.active { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); border-color: var(--primary); color: #fff; }
 
-        .nav-btn:hover {
-            border-color: var(--primary);
-            color: var(--text-main);
-        }
+        .lesson-content { display: none; }
+        .lesson-content.active { display: block; }
 
-        .nav-btn.active {
-            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
-            border-color: var(--primary);
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
-        }
+        .summary-card { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; line-height: 1.8; margin-bottom: 30px; }
+        .summary-card h3 { color: var(--primary); font-size: 1.3rem; margin: 20px 0 10px 0; border-bottom: 1px dashed var(--border); padding-bottom: 8px; }
+        .summary-card ul { padding-right: 25px; color: #cbd5e1; }
 
-        .lesson-content {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out forwards;
-        }
+        .section-title { font-size: 1.4rem; margin-bottom: 15px; }
+        .questions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 30px; }
+        .q-card { background: rgba(30, 41, 59, 0.6); border: 1px solid var(--border); border-right: 4px solid var(--accent); border-radius: 12px; padding: 20px; cursor: pointer; }
+        .q-card::after { content: "💬 اضغط لمناقشة السؤال مع AI"; display: block; margin-top: 10px; font-size: 0.8rem; color: var(--primary); }
 
-        .lesson-content.active {
-            display: block;
+        .quiz-section { background-color: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 30px; margin-bottom: 40px; text-align: center; }
+        .start-quiz-btn, .finish-quiz-btn {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #fff; border: none; padding: 14px 35px;
+            font-size: 1.1rem; font-weight: 800; border-radius: 12px; cursor: pointer; transition: 0.3s;
         }
+        .quiz-container { display: none; text-align: right; margin-top: 25px; }
+        .quiz-q { margin-bottom: 25px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+        .quiz-q p { font-size: 1.1rem; font-weight: bold; margin-bottom: 12px; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .options-group { display: flex; flex-direction: column; gap: 10px; }
+        .opt-label {
+            background: #0f172a; border: 1px solid var(--border); padding: 12px 16px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; transition: 0.2s;
         }
-
-        .summary-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            line-height: 1.8;
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
-        }
-
-        .summary-card h3 {
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin: 20px 0 10px 0;
-            border-bottom: 1px dashed var(--border);
-            padding-bottom: 8px;
-        }
-
-        .summary-card h3:first-child {
-            margin-top: 0;
-        }
-
-        .summary-card p, .summary-card ul {
-            color: #cbd5e1;
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-        }
-
-        .summary-card ul {
-            padding-right: 25px;
-        }
-
-        .summary-card li {
-            margin-bottom: 8px;
-        }
-
-        .highlight {
-            color: #38bdf8;
-            font-weight: bold;
-        }
-
-        .section-title {
-            font-size: 1.4rem;
-            color: var(--text-main);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .questions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .q-card {
-            background: rgba(30, 41, 59, 0.6);
-            border: 1px solid var(--border);
-            border-right: 4px solid var(--accent);
-            border-radius: 12px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .q-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.2);
-        }
-
-        .q-card::after {
-            content: "💬 اضغط لمناقشة السؤال مع AI";
-            display: block;
-            margin-top: 10px;
-            font-size: 0.8rem;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .q-title {
-            color: #f1f5f9;
-            font-weight: 700;
-            margin-bottom: 8px;
-            font-size: 1.05rem;
-        }
-
-        .q-ans {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .quiz-section {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .start-quiz-btn {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
-            border: none;
-            padding: 16px 40px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            border-radius: 12px;
-            cursor: pointer;
-            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .start-quiz-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
-        }
-
-        .quiz-container {
-            display: none;
-            text-align: right;
-            margin-top: 25px;
-        }
-
-        .quiz-q {
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .quiz-q p {
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 12px;
-        }
-
-        .options {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .option-btn {
-            background-color: #0f172a;
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            padding: 12px 16px;
-            border-radius: 8px;
-            text-align: right;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .option-btn:hover {
-            border-color: var(--primary);
-            background-color: #1e293b;
-        }
+        .opt-label:hover { border-color: var(--primary); }
 
         .explanation-box {
-            display: none;
-            margin-top: 12px;
-            padding: 12px 16px;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-            background: rgba(15, 23, 42, 0.8);
-            border-right: 4px solid var(--primary);
-            color: #e2e8f0;
+            display: none; margin-top: 12px; padding: 14px; border-radius: 8px; font-size: 0.95rem; line-height: 1.6; background: rgba(15, 23, 42, 0.9); border-right: 4px solid var(--primary);
         }
 
-        .ai-fab {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 800;
-            font-size: 1.3rem;
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5);
-            cursor: pointer;
-            border: none;
-            transition: transform 0.3s ease;
-            z-index: 1000;
+        .final-score-card {
+            display: none; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%); border: 2px solid var(--accent); padding: 20px; border-radius: 12px; margin-top: 25px; text-align: center; font-size: 1.3rem; font-weight: bold; color: var(--accent);
         }
 
-        .ai-fab:hover {
-            transform: scale(1.1);
-        }
-
-        .chat-modal {
-            position: fixed;
-            bottom: 105px;
-            left: 30px;
-            width: 380px;
-            height: 500px;
-            background-color: #0f172a;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            display: none;
-            flex-direction: column;
-            z-index: 1000;
-            overflow: hidden;
-        }
-
-        .chat-header {
-            background-color: #1e293b;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .chat-header h4 {
-            color: var(--primary);
-            font-size: 1.1rem;
-        }
-
-        .close-chat {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            cursor: pointer;
-        }
-
-        .chat-body {
-            flex: 1;
-            padding: 15px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .msg {
-            max-width: 85%;
-            padding: 10px 14px;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-
-        .msg.bot {
-            background-color: #1e293b;
-            color: var(--text-main);
-            align-self: flex-start;
-            border-bottom-right-radius: 2px;
-        }
-
-        .msg.user {
-            background-color: var(--primary);
-            color: #0f172a;
-            font-weight: 500;
-            align-self: flex-end;
-            border-bottom-left-radius: 2px;
-        }
-
-        .chat-footer {
-            padding: 12px;
-            background-color: #1e293b;
-            display: flex;
-            gap: 8px;
-            border-top: 1px solid var(--border);
-        }
-
-        .chat-footer input {
-            flex: 1;
-            padding: 10px;
-            background-color: #0f172a;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-main);
-            outline: none;
-        }
-
-        .chat-footer button {
-            background-color: var(--primary);
-            color: #0f172a;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
-        }
+        /* AI Floating Modal */
+        .ai-fab { position: fixed; bottom: 30px; left: 30px; width: 65px; height: 65px; border-radius: 50%; background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%); color: #fff; font-weight: 800; font-size: 1.3rem; cursor: pointer; border: none; z-index: 1000; }
+        .chat-modal { position: fixed; bottom: 105px; left: 30px; width: 380px; height: 500px; background-color: #0f172a; border: 1px solid var(--border); border-radius: 16px; display: none; flex-direction: column; z-index: 1000; overflow: hidden; }
+        .chat-header { background-color: #1e293b; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { max-width: 85%; padding: 10px 14px; border-radius: 12px; font-size: 0.95rem; line-height: 1.6; white-space: pre-line; }
+        .msg.bot { background-color: #1e293b; color: var(--text-main); align-self: flex-start; }
+        .msg.user { background-color: var(--primary); color: #0f172a; font-weight: 500; align-self: flex-end; }
+        .chat-footer { padding: 12px; background-color: #1e293b; display: flex; gap: 8px; }
+        .chat-footer input { flex: 1; padding: 10px; background-color: #0f172a; border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none; }
+        .chat-footer button { background-color: var(--primary); color: #0f172a; border: none; padding: 10px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -414,11 +91,7 @@
             <h2>إعداد الطالب: فارس المطيري 🎓</h2>
             <p>مادة الأحياء (1) - الصف الأول الثانوي</p>
         </div>
-        <div>
-            <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">
-                المنصة الدراسية التفاعلية
-            </span>
-        </div>
+        <span style="background: rgba(56, 189, 248, 0.15); color: var(--primary); padding: 8px 16px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">المنصة الدراسية التفاعلية</span>
     </div>
 
     <div class="lesson-nav">
@@ -430,88 +103,53 @@
     <div id="lesson1" class="lesson-content active">
         <div class="summary-card">
             <h3>📑 تلخيص شامل: مدخل إلى علم الأحياء</h3>
-            <p><span class="highlight">علم الأحياء (Biology):</span> هو العلم الذي يدرس أصل الحياة وتاريخها وكل ما كان حياً يوماً ما، وتركيب المخلوقات الحية وكيف تقوم بوظائفها وكيف تتفاعل مع بعضها ومع بيئاتها.</p>
-
-            <h3>👨‍🔬 ماذا يفعل علماء الأحياء؟</h3>
+            <p><span style="color:var(--primary); font-weight:bold;">علم الأحياء:</span> يدرس أصل الحياة وتاريخها، وتركيب المخلوقات الحية وظائفها وتفاعلها مع بيئاتها.</p>
+            <h3>🧬 الخصائص الأساسية للمخلوقات الحية:</h3>
             <ul>
-                <li><strong>دراسة تنوع الحياة:</strong> البحث في خواص المخلوقات الحية وتصنيفها من البكتيريا إلى النباتات والحيوانات.</li>
-                <li><strong>البحث في الأمراض:</strong> دراسة أسباب الأمراض، كيفية انتشارها، وتطوير اللقاحات والأدوية.</li>
-                <li><strong>تطوير التقنيات:</strong> تطبيق المعرفة العلمية لتلبية احتياجات الإنسان مثل تحسين المحاصيل الزراعية.</li>
-                <li><strong>حماية البيئة:</strong> دراسة وسائل المحافظة على الأنواع المهددة بالانقراض وحماية الموارد الطبيعية.</li>
-            </ul>
-
-            <h3>🧬 خصائص المخلوق الحي (الخصائص الثمانية):</h3>
-            <ul>
-                <li><strong>مكون من خلية أو أكثر:</strong> الخلية هي وحدة التركيب والوظيفة الأساسية.</li>
-                <li><strong>إظهار التنظيم (التعضي):</strong> تنظيم الخلايا إلى أنسجة، وأنسجة إلى أعضاء، وأعضاء إلى أجهزة.</li>
-                <li><strong>النمو:</strong> زيادة في كتلة المخلوق الحي وتكون أشكال جديدة.</li>
-                <li><strong>التكاثر:</strong> إنتاج أفراد جديدة لنفس النوع للحفاظ عليه من الانقراض.</li>
-                <li><strong>الحاجة إلى الطاقة:</strong> استهلاك الغذاء للحصول على الطاقة اللازمة للأنشطة الحيوية.</li>
-                <li><strong>الاستجابة للمثيرات:</strong> التفاعل مع المؤثرات الداخلية والخارجية.</li>
-                <li><strong>المحافظة على الاتزان الداخلي:</strong> تنظيم الظروف الداخلية للمخلوق الحي للبقاء على قيد الحياة.</li>
-                <li><strong>التكيف:</strong> ملاءمة قابلة للتوارث تمكن المخلوق من العيش بملائمة في بيئته.</li>
+                <li>مكون من خلية أو أكثر.</li>
+                <li>إظهار التنظيم (التعضي).</li>
+                <li>النمو والتكاثر.</li>
+                <li>الحاجة إلى الطاقة والاستجابة للمثيرات.</li>
+                <li>المحافظة على الاتزان الداخلي والتكيف.</li>
             </ul>
         </div>
 
-        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
+        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط لمناقشتها مع AI)</div>
         <div class="questions-grid">
             <div class="q-card" onclick="askAiQuestion('ما الفرق بين الاستجابة والتكيف؟')">
-                <div class="q-title">س: ما الفرق بين الاستجابة والتكيف؟</div>
-                <div class="q-ans">الاستجابة رد فعل موقت ومباشر لمثير ما، بينما التكيف ملاءمة موروثة تمكن المخلوق من البقاء عبر الأجيال.</div>
+                <strong>س: ما الفرق بين الاستجابة والتكيف؟</strong>
             </div>
             <div class="q-card" onclick="askAiQuestion('لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟')">
-                <div class="q-title">س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</div>
-                <div class="q-ans">لأنها تفتقر لباقي خصائص الحياة مثل الخلية، التكاثر، الاتزان الداخلي، والتكيف.</div>
-            </div>
-            <div class="q-card" onclick="askAiQuestion('ما أهمية التكاثر للمخلوق الحي؟')">
-                <div class="q-title">س: ما أهمية التكاثر للمخلوق الحي؟</div>
-                <div class="q-ans">أساسي لحفظ النوع بأكمله من الانقراض وليس لحياة الفرد بمفرده.</div>
+                <strong>س: لماذا لا تُعد البلورات مخلوقات حية رغم نموها؟</strong>
             </div>
         </div>
 
         <div class="quiz-section">
             <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
 
-            <div class="quiz-container">
-                <div class="quiz-q" data-explanation="التبرير العلمي: الاتزان الداخلي هو تنظيم الظروف الداخلية للمخلوق الحي للحفاظ على حياته واستقراره الفسيولوجي.">
+            <div class="quiz-container" id="quiz1">
+                <div class="quiz-q" data-correct="1" data-exp="التبرير العلمي: الاتزان الداخلي هو عملية تنظيم الظروف الداخلية للمخلوق الحي لضمان استقراره وبقائه على قيد الحياة.">
                     <p>1. تنظيم الظروف الداخلية للمخلوق الحي لضمان بقائه يُسمى:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) التكيف</button>
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الاتزان الداخلي</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النمو</button>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l1_q1" value="0"> أ) التكيف</label>
+                        <label class="opt-label"><input type="radio" name="l1_q1" value="1"> ب) الاتزان الداخلي</label>
+                        <label class="opt-label"><input type="radio" name="l1_q1" value="2"> ج) النمو</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
 
-                <div class="quiz-q" data-explanation="التبرير العلمي: الحركة المفاجئة لأسراب الأسماك عند التهديد هي رد فعل سريع ومباشر لمؤثر خارجي وتسمى استجابة.">
+                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: الحركة المفاجئة لأسراب الأسماك عند شعورها بالخطر تُعتبر رد فعل سريع ومباشر لمؤثر خارجي وهو ما يُعرف بالاستجابة.">
                     <p>2. أسراب الأسماك التي تتحرك معاً فجأة عند اقتراب خطر تُعبر عن خاصية:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) الاستجابة للمثيرات</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التعضي</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) التكيف</button>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="0"> أ) الاستجابة للمثيرات</label>
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="1"> ب) التعضي</label>
+                        <label class="opt-label"><input type="radio" name="l1_q2" value="2"> ج) التكيف</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
 
-                <div class="quiz-q" data-explanation="التبرير العلمي: الخلية هي أصغر وحدة بناء وتركيب تؤدي كافة الوظائف الحيوية في أجهزة الكائنات الحية.">
-                    <p>3. أي من التالي يُعد الوحدة الأساسية للتركيب والوظيفة في جميع المخلوقات الحية؟</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) العضو</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) النسيج</button>
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) الخلية</button>
-                    </div>
-                    <div class="explanation-box"></div>
-                </div>
-
-                <div class="quiz-q" data-explanation="التبرير العلمي: تحوير الأوراق لأشواك هي صفة موروثة تطورت لتلائم بيئة الصحراء الجافة وتقليل بخر الماء.">
-                    <p>4. تحوير أوراق نبات الصبار إلى أشواك لتقليل فقدان الماء يُعد مثالاً على:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) التكيف</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التكاثر</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الاتزان الداخلي</button>
-                    </div>
-                    <div class="explanation-box"></div>
-                </div>
+                <button class="finish-quiz-btn" onclick="submitQuiz('quiz1')">📊 إنهاء الاختبار وعرض النتيجة</button>
+                <div class="final-score-card"></div>
             </div>
         </div>
     </div>
@@ -520,84 +158,25 @@
     <div id="lesson2" class="lesson-content">
         <div class="summary-card">
             <h3>📑 تلخيص شامل: طبيعة العلم وطرائقه</h3>
-            <p><span class="highlight">العلم الطبيعي (التجريبي):</span> هو بناء من المعرفة اعتمد على دراسة الطبيعة من خلال الملاحظة والتجريب.</p>
-
-            <h3>⚙️ خصائص العلم الطبيعي:</h3>
-            <ul>
-                <li><strong>يعتمد على الدليل:</strong> يجمع الحقائق المباشرة والأدلة القابلة للملاحظة.</li>
-                <li><strong>ينتج أسئلة جديدة:</strong> كل اكتشاف يفتح أفاقاً وبحوثاً جديدة.</li>
-                <li><strong>يختبر الاستنتاجات:</strong> إخضاع الفرضيات لمزيد من الاختبارات الدقيقة.</li>
-                <li><strong>يتحدى النظريات المقبولة:</strong> مناقشة الآراء والنتائج العلمية وتطويرها باستمرار.</li>
-                <li><strong>يخضع لمراجعة الأقران:</strong> تقييم الأبحاث بواسطة علماء متخصصين في نفس المجال.</li>
-            </ul>
-
-            <h3>🔍 الطرائق العلمية (Scientific Methods):</h3>
-            <ul>
-                <li><strong>الملاحظة:</strong> طريقة منتظمة لجمع المعلومات باستعمال الحواس أو الأدوات.</li>
-                <li><strong>صياغة الفرضية:</strong> تفسير قابل للاختبار للظاهرة العلمية.</li>
-                <li><strong>التجربة المنضبطة:</strong> تجربة تحتوي على متغير مستقل، متغير تابع، ومجموعة ضابطة.</li>
-            </ul>
-        </div>
-
-        <div class="section-title">💡 الأسئلة المقترحة المتوقعة للاختبار (اضغط على أي سؤال للشرح)</div>
-        <div class="questions-grid">
-            <div class="q-card" onclick="askAiQuestion('ما الفرق بين المتغير المستقل والمتغير التابع؟')">
-                <div class="q-title">س: ما الفرق بين المتغير المستقل والمتغير التابع؟</div>
-                <div class="q-ans">المتغير المستقل يُغيره الباحث، بينما المتغير التابع يتغير تبعاً له ويتم قياسه.</div>
-            </div>
-            <div class="q-card" onclick="askAiQuestion('ما أهمية المجموعة الضابطة في التجربة؟')">
-                <div class="q-title">س: ما أهمية المجموعة الضابطة في التجربة؟</div>
-                <div class="q-ans">تُستخدم معياراً للمقارنة لمعرفة مدى تأثير المتغير المستقل.</div>
-            </div>
-            <div class="q-card" onclick="askAiQuestion('ماذا نعني بمراجعة الأقران وما أهميتها؟')">
-                <div class="q-title">س: ماذا نعني بمراجعة الأقران؟</div>
-                <div class="q-ans">تدقيق الأبحاث والنتائج العلمية بواسطة علماء آخرين متخصصين قبل نشرها.</div>
-            </div>
+            <p><span style="color:var(--primary); font-weight:bold;">العلم الطبيعي:</span> بناء من المعرفة يدرس الطبيعة المعتمدة على الملاحظة والتجريب.</p>
         </div>
 
         <div class="quiz-section">
             <button class="start-quiz-btn" onclick="startQuiz(this)">🚀 ابدأ الاختبار التفاعلي</button>
 
-            <div class="quiz-container">
-                <div class="quiz-q" data-explanation="التبرير العلمي: المتغير المستقل هو العامل الذي يتحكم فيه الباحث ويقوم بتغييره لمعرفة مدى تأثيره على النتائج.">
+            <div class="quiz-container" id="quiz2">
+                <div class="quiz-q" data-correct="0" data-exp="التبرير العلمي: المتغير المستقل هو العامل الذي يُغيره الباحث عمداً في التجربة لمعرفة مدى تأثيره.">
                     <p>1. العامل الذي يختبره الباحث في التجربة ويقوم بتغييره هو:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">أ) المتغير المستقل</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) المتغير التابع</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) المجموعة الضابطة</button>
+                    <div class="options-group">
+                        <label class="opt-label"><input type="radio" name="l2_q1" value="0"> أ) المتغير المستقل</label>
+                        <label class="opt-label"><input type="radio" name="l2_q1" value="1"> ب) المتغير التابع</label>
+                        <label class="opt-label"><input type="radio" name="l2_q1" value="2"> ج) المجموعة الضابطة</label>
                     </div>
                     <div class="explanation-box"></div>
                 </div>
 
-                <div class="quiz-q" data-explanation="التبرير العلمي: المجموعة الضابطة تبقى تحت ظروف طبيعية دون تغير لتعطي أساساً أو معياراً نقارن به نتائج المجموعة التجريبية.">
-                    <p>2. المجموعة التي تُستخدم للمقارنة في التجربة ولا يُجرى عليها أي تغيير هي:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) المجموعة التجريبية</button>
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) المجموعة الضابطة</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) الفرضية</button>
-                    </div>
-                    <div class="explanation-box"></div>
-                </div>
-
-                <div class="quiz-q" data-explanation="التبرير العلمي: الفرضية هي اقتراح أو تفسير مؤقت ظاهري يصوغه الباحث ويكون قابلاً للاختبار بالتجربة.">
-                    <p>3. صياغة تفسير قابل للاختبار يُعرف بـ:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الملاحظة</button>
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ب) الفرضية</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ج) النظرية</button>
-                    </div>
-                    <div class="explanation-box"></div>
-                </div>
-
-                <div class="quiz-q" data-explanation="التبرير العلمي: مراجعة الأقران تضمن المصداقية والدقة العلمية للأبحاث قبل اعتمادها ونشرها للمجتمع العلمي.">
-                    <p>4. فحص الأبحاث بواسطة علماء في نفس التخصص قبل إعلانها يُسمى:</p>
-                    <div class="options">
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">أ) الاستنتاج</button>
-                        <button class="option-btn" data-correct="false" onclick="checkAnswer(this)">ب) التجريب</button>
-                        <button class="option-btn" data-correct="true" onclick="checkAnswer(this)">ج) مراجعة الأقران</button>
-                    </div>
-                    <div class="explanation-box"></div>
-                </div>
+                <button class="finish-quiz-btn" onclick="submitQuiz('quiz2')">📊 إنهاء الاختبار وعرض النتيجة</button>
+                <div class="final-score-card"></div>
             </div>
         </div>
     </div>
@@ -608,10 +187,10 @@
 <div class="chat-modal" id="chatModal">
     <div class="chat-header">
         <h4>🤖 المساعد العلمي الذكي</h4>
-        <button class="close-chat" onclick="toggleChat()">✕</button>
+        <button style="background:none; border:none; color:#aaa; cursor:pointer;" onclick="toggleChat()">✕</button>
     </div>
     <div class="chat-body" id="chatBody">
-        <div class="msg bot">مرحباً بك! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة أو مفهوم وسأجيبك باختصار ووضوح!</div>
+        <div class="msg bot">مرحباً بك! أنا مساعدك الذكي لمادة الأحياء. اسألني عن أي نقطة وسأجيبك بأسلوب مرتب ومختصر!</div>
     </div>
     <div class="chat-footer">
         <input type="text" id="chatInput" placeholder="اكتب سؤالك هنا..." onkeydown="if(event.key==='Enter') sendAiMessage()">
@@ -631,46 +210,41 @@
 
     function startQuiz(btn) {
         btn.style.display = 'none';
-        const quizContainer = btn.nextElementSibling;
-        quizContainer.style.display = 'block';
+        btn.nextElementSibling.style.display = 'block';
     }
 
-    function checkAnswer(btn) {
-        const questionCard = btn.closest('.quiz-q');
-        const options = questionCard.querySelectorAll('.option-btn');
-        const explanationBox = questionCard.querySelector('.explanation-box');
-        const isCorrect = btn.getAttribute('data-correct') === 'true';
+    function submitQuiz(quizId) {
+        const quizContainer = document.getElementById(quizId);
+        const questions = quizContainer.querySelectorAll('.quiz-q');
+        let score = 0;
+        let total = questions.length;
 
-        options.forEach(b => {
-            b.style.backgroundColor = '#0f172a';
-            b.style.borderColor = 'var(--border)';
-            b.style.color = 'var(--text-main)';
+        questions.forEach(q => {
+            const correctVal = q.dataset.correct;
+            const exp = q.dataset.exp;
+            const selectedOpt = q.querySelector('input[type="radio"]:checked');
+            const expBox = q.querySelector('.explanation-box');
+
+            expBox.style.display = 'block';
+
+            if (selectedOpt) {
+                if (selectedOpt.value === correctVal) {
+                    score++;
+                    expBox.style.borderRightColor = 'var(--accent)';
+                    expBox.innerHTML = `<span style="color:#10b981; font-weight:bold;">✅ إجابة صحيحة!</span><br>${exp}`;
+                } else {
+                    expBox.style.borderRightColor = '#ef4444';
+                    expBox.innerHTML = `<span style="color:#ef4444; font-weight:bold;">❌ إجابة خاطئة.</span><br>${exp}`;
+                }
+            } else {
+                expBox.style.borderRightColor = '#eab308';
+                expBox.innerHTML = `<span style="color:#eab308; font-weight:bold;">⚠️ لم تقم بالإجابة على هذا السؤال.</span><br>${exp}`;
+            }
         });
 
-        if (isCorrect) {
-            btn.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
-            btn.style.borderColor = 'var(--accent)';
-            btn.style.color = '#10b981';
-            explanationBox.style.borderRightColor = 'var(--accent)';
-            explanationBox.innerHTML = `✅ <strong>إجابة صحيحة!</strong><br>${questionCard.dataset.explanation}`;
-        } else {
-            btn.style.backgroundColor = 'rgba(239, 68, 68, 0.2)';
-            btn.style.borderColor = '#ef4444';
-            btn.style.color = '#ef4444';
-
-            options.forEach(b => {
-                if (b.getAttribute('data-correct') === 'true') {
-                    b.style.backgroundColor = 'rgba(16, 185, 129, 0.2)';
-                    b.style.borderColor = 'var(--accent)';
-                    b.style.color = '#10b981';
-                }
-            });
-
-            explanationBox.style.borderRightColor = '#ef4444';
-            explanationBox.innerHTML = `❌ <strong>إجابة خاطئة.</strong> الإجابة الصحيحة باللون الأخضر.<br>${questionCard.dataset.explanation}`;
-        }
-
-        explanationBox.style.display = 'block';
+        const scoreCard = quizContainer.querySelector('.final-score-card');
+        scoreCard.style.display = 'block';
+        scoreCard.innerHTML = `🏆 الدرجة النهائية: ${score} من ${total}`;
     }
 
     function toggleChat() {
@@ -679,10 +253,8 @@
     }
 
     function askAiQuestion(questionText) {
-        const modal = document.getElementById('chatModal');
-        modal.style.display = 'flex';
-        const input = document.getElementById('chatInput');
-        input.value = questionText;
+        document.getElementById('chatModal').style.display = 'flex';
+        document.getElementById('chatInput').value = questionText;
         sendAiMessage();
     }
 
@@ -707,7 +279,7 @@
             });
             const data = await res.json();
             const reply = data.response || data.error || 'عذراً، حدث خطأ.';
-            
+
             body.innerHTML += `<div class="msg bot">${reply}</div>`;
             body.scrollTop = body.scrollHeight;
 
